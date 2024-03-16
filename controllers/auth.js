@@ -28,7 +28,6 @@ export const register = async (req, res) => {
             data: user,
         });
     } catch (error) {
-        console.error(error);
         res.status(500).json({
             success: false,
             message: "Internal Server Error",
@@ -44,7 +43,6 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log("isPasswordValid-->", isPasswordValid, password);
         if (!isPasswordValid) {
             return res.status(400).json({ message: "Invalid credentials" });
         }
@@ -53,7 +51,6 @@ export const login = async (req, res) => {
         });
         res.json({ token });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 };
